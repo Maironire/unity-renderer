@@ -51,8 +51,8 @@ namespace DCL.Emotes
 
             foreach (EmbeddedEmote emote in embeddedEmotesSo.emotes)
             {
-                Assert.AreEqual(dataStore.animations[(WearableLiterals.BodyShapes.FEMALE, emote.id)]?.clip, emote.femaleAnimation);
-                Assert.AreEqual(dataStore.animations[(WearableLiterals.BodyShapes.MALE, emote.id)]?.clip, emote.maleAnimation);
+                Assert.AreEqual(dataStore.animations[(WearableLiterals.BodyShapes.FEMALE, emote.id)]?.AvatarClip, emote.femaleAnimation);
+                Assert.AreEqual(dataStore.animations[(WearableLiterals.BodyShapes.MALE, emote.id)]?.AvatarClip, emote.maleAnimation);
                 Assert.IsTrue(tracker.loaders.ContainsKey((WearableLiterals.BodyShapes.MALE, emote.id)));
             }
 
@@ -75,7 +75,7 @@ namespace DCL.Emotes
             emoteCatalog.Received(1).RequestEmoteAsync("emote0", Arg.Any<CancellationToken>());
             loader.Received(1).LoadEmote(tracker.animationsModelsContainer, emote, WearableLiterals.BodyShapes.FEMALE, Arg.Any<CancellationToken>());
             var animKey = (WearableLiterals.BodyShapes.FEMALE, "emote0");
-            Assert.AreEqual(animClip, dataStore.animations[animKey]?.clip);
+            Assert.AreEqual(animClip, dataStore.animations[animKey]?.AvatarClip);
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace DCL.Emotes
                 emoteCatalog.Received(1).RequestEmoteAsync("emote0", Arg.Any<CancellationToken>());
                 loader.Received(1).LoadEmote(tracker.animationsModelsContainer, emote, WearableLiterals.BodyShapes.FEMALE, Arg.Any<CancellationToken>());
                 var animKey = (WearableLiterals.BodyShapes.FEMALE, "emote0");
-                Assert.AreEqual(animClip, dataStore.animations[animKey]?.clip);
+                Assert.AreEqual(animClip, dataStore.animations[animKey]?.AvatarClip);
             });
     }
 }

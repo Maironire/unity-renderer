@@ -31,23 +31,23 @@ namespace DCLFeatures.ScreencaptureCamera.CameraObject
 
             ScreenFrameData targetScreenFrame = CalculateTargetScreenFrame(CalculateCurrentScreenFrame());
 
-            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0, DefaultFormat.HDR);
+            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 24);
             ScreenCapture.CaptureScreenshotIntoRenderTexture(initialRenderTexture);
 
-            var finalRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0);
-            Graphics.Blit(initialRenderTexture, finalRenderTexture); // we need to Blit to have HDR included on crop
+            // var finalRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0);
+            // Graphics.Blit(initialRenderTexture, finalRenderTexture); // we need to Blit to have HDR included on crop
 
-            RenderTexture.active = finalRenderTexture;
-            screenshot.ReadPixels(new Rect(0, 0, targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt), 0, 0);
-            screenshot.Apply(updateMipmaps: false);
+            RenderTexture.active = initialRenderTexture;
+            screenshot.ReadPixels(new Rect(0, 0, initialRenderTexture.width, initialRenderTexture.height), 0, 0);
+            screenshot.Apply();
             RenderTexture.active = null;
 
             // CropCentralFrameToScreenshotTexture(finalRenderTexture, targetScreenFrame);
 
             initialRenderTexture.Release();
-            finalRenderTexture.Release();
+            initialRenderTexture.Release();
 
-            onComplete?.Invoke(Application.isEditor ? FlipTextureVertically(screenshot) : screenshot);
+            onComplete?.Invoke(screenshot);
         }
 
         private ScreenFrameData CalculateCurrentScreenFrame()

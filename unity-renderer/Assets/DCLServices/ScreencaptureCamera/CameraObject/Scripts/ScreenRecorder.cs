@@ -14,7 +14,7 @@ namespace DCLFeatures.ScreencaptureCamera.CameraObject
         private readonly float targetAspectRatio;
         private readonly RectTransform canvasRectTransform;
 
-        private readonly Texture2D screenshot = new (TARGET_FRAME_WIDTH, TARGET_FRAME_HEIGHT, TextureFormat.RGB24, false);
+        private readonly Texture2D screenshot = new (TARGET_FRAME_WIDTH, TARGET_FRAME_HEIGHT, TextureFormat.RGBAFloat, false);
         private RenderTexture originalBaseTargetTexture;
 
         public ScreenRecorder(RectTransform canvasRectTransform)
@@ -31,7 +31,7 @@ namespace DCLFeatures.ScreencaptureCamera.CameraObject
 
             ScreenFrameData targetScreenFrame = CalculateTargetScreenFrame(CalculateCurrentScreenFrame());
 
-            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 24, DefaultFormat.HDR);
+            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0, GraphicsFormat.R32G32B32A32_SFloat);
             ScreenCapture.CaptureScreenshotIntoRenderTexture(initialRenderTexture);
 
             // var finalRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0);

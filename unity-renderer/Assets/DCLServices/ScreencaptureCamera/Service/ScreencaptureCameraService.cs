@@ -37,7 +37,10 @@ namespace DCLServices.ScreencaptureCamera.Service
             this.externalDependencies = externalDependencies;
         }
 
-        public void Initialize() { }
+        public void Initialize()
+        {
+            InitializeAsyncInternal(CancellationToken.None).Forget();
+        }
 
         public void Dispose()
         {
@@ -50,7 +53,7 @@ namespace DCLServices.ScreencaptureCamera.Service
                 Object.Destroy(enableCameraButtonCanvas.gameObject);
         }
 
-        public async UniTask InitializeAsync(CancellationToken cancellationToken)
+        private async UniTask InitializeAsyncInternal(CancellationToken cancellationToken)
         {
             await UniTask.WaitUntil(() => featureFlags.Get().IsInitialized, cancellationToken: cancellationToken);
             if (!featureIsEnabled) return;

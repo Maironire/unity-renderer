@@ -31,10 +31,10 @@ namespace DCLFeatures.ScreencaptureCamera.CameraObject
 
             ScreenFrameData targetScreenFrame = CalculateTargetScreenFrame(CalculateCurrentScreenFrame());
 
-            var initialRenderTexture = new RenderTexture(targetScreenFrame.ScreenWidthInt, targetScreenFrame.ScreenHeightInt, 0, DefaultFormat.HDR);
+            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0, DefaultFormat.HDR);
             ScreenCapture.CaptureScreenshotIntoRenderTexture(initialRenderTexture);
 
-            var finalRenderTexture = new RenderTexture(targetScreenFrame.ScreenWidthInt, targetScreenFrame.ScreenHeightInt, 0);
+            var finalRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0);
             Graphics.Blit(initialRenderTexture, finalRenderTexture); // we need to Blit to have HDR included on crop
 
             RenderTexture.active = finalRenderTexture;

@@ -31,7 +31,7 @@ namespace DCLFeatures.ScreencaptureCamera.CameraObject
 
             ScreenFrameData targetScreenFrame = CalculateTargetScreenFrame(CalculateCurrentScreenFrame());
 
-            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 24);
+            var initialRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 24, DefaultFormat.HDR);
             ScreenCapture.CaptureScreenshotIntoRenderTexture(initialRenderTexture);
 
             // var finalRenderTexture = new RenderTexture(targetScreenFrame.FrameWidthInt, targetScreenFrame.FrameHeightInt, 0);

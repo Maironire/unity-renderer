@@ -2,6 +2,7 @@ using AvatarSystem;
 using DCL.Chat;
 using DCL.Chat.Channels;
 using DCL.Controllers;
+using DCL.Emotes;
 using DCL.Helpers;
 using DCL.ProfanityFiltering;
 using DCL.Providers;
@@ -77,6 +78,7 @@ namespace DCL
                 new DeleteWebRequestFactory(),
                 new RPCSignRequest(irpc)
             );
+
             result.Register<IWebRequestController>(() => webRequestController);
 
             result.Register<IServiceProviders>(() => new ServiceProviders());
@@ -129,6 +131,7 @@ namespace DCL
                     result.Get<ILambdasService>(),
                     result.Get<IServiceProviders>(),
                     featureFlagsDataStore);
+
                 var lambdasEmotesCatalogService = new LambdasEmotesCatalogService(emotesRequest, addressableResourceProvider);
                 var webInterfaceEmotesCatalogService = new WebInterfaceEmotesCatalogService(EmotesCatalogBridge.GetOrCreate(), addressableResourceProvider);
                 return new EmotesCatalogServiceProxy(lambdasEmotesCatalogService, webInterfaceEmotesCatalogService, featureFlagsDataStore, KernelConfig.i);
@@ -150,6 +153,11 @@ namespace DCL
                 KernelConfig.i,
                 new WearablesWebInterfaceBridge(),
                 featureFlagsDataStore));
+
+            result.Register<IEmotesService>(() => new EmotesService(new EmoteAnimationLoaderFactory(),
+                result.Get<IEmotesCatalogService>(),
+                result.Get<IWearablesCatalogService>(),
+                result.Get<IServiceProviders>().catalyst));
 
             result.Register<IProfanityFilter>(() => new ThrottledRegexProfanityFilter(
                 new ProfanityWordProviderFromResourcesJson("Profanity/badwords"), 20));

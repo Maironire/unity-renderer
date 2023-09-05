@@ -45,6 +45,7 @@ namespace DCL
         public enum Network
         {
             MAINNET,
+            GOERLI,
             SEPOLIA,
         }
 
@@ -197,6 +198,9 @@ namespace DCL
             {
                 case Network.SEPOLIA:
                     debugString = "NETWORK=sepolia&";
+                    break;
+                case Network.GOERLI:
+                    debugString = "NETWORK=goerli&";
                     break;
                 case Network.MAINNET:
                     debugString = "NETWORK=mainnet&";

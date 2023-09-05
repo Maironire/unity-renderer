@@ -232,7 +232,7 @@ function* fetchItemsFromCatalyst(
     }
   }
 
-  if (PREVIEW) {
+  if (true) {
     const v2Wearables: PartialWearableV2[] = yield call(fetchWearablesByCollectionFromPreviewMode, filters)
     result.push(...v2Wearables)
   }

@@ -100,17 +100,14 @@ export function getSSOUrl() {
  * @returns Root URL with pathname where the index.html is served.
  */
 export const rootURLPreviewMode = () => {
+  return `${location.protocol}//${location.hostname.replace('play', 'hypo')}`
   if (typeof qs.get('CATALYST') === 'string' && qs.get('CATALYST')?.length !== 0) {
     return addHttpsIfNoProtocolIsSet(qs.get('CATALYST')!)
   }
   return `${location.origin}${location.pathname}`.replace(/\/$/, '')
 }
 
-export const PIN_CATALYST = PREVIEW
-  ? rootURLPreviewMode()
-  : typeof qs.get('CATALYST') === 'string'
-  ? addHttpsIfNoProtocolIsSet(qs.get('CATALYST')!)
-  : undefined
+export const PIN_CATALYST = 'https://peer.decentral.io'
 
 export const BYPASS_CONTENT_ALLOWLIST = qs.has('BYPASS_CONTENT_ALLOWLIST')
   ? qs.get('BYPASS_CONTENT_ALLOWLIST') === 'true'

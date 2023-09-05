@@ -127,10 +127,11 @@ export const commConfigurations = {
 
 export enum ETHEREUM_NETWORK {
   MAINNET = 'mainnet',
-  SEPOLIA = 'sepolia'
+  SEPOLIA = 'sepolia',
+  GOERLI  = 'goerli'
 }
 
-const knownTLDs = ['zone', 'org', 'today']
+const knownTLDs = ['zone', 'org', 'today', 'world']
 
 // return one of org zone today
 export function getTLD() {

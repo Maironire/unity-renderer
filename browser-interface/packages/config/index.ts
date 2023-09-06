@@ -107,7 +107,11 @@ export const rootURLPreviewMode = () => {
   return `${location.origin}${location.pathname}`.replace(/\/$/, '')
 }
 
-export const PIN_CATALYST = 'https://peer-eu1.decentraland.org'
+export const PIN_CATALYST = PREVIEW
+? rootURLPreviewMode()
+: typeof qs.get('CATALYST') === 'string'
+? addHttpsIfNoProtocolIsSet(qs.get('CATALYST')!)
+: undefined
 
 export const BYPASS_CONTENT_ALLOWLIST = qs.has('BYPASS_CONTENT_ALLOWLIST')
   ? qs.get('BYPASS_CONTENT_ALLOWLIST') === 'true'

@@ -131,7 +131,7 @@ export const getSynapseUrl = (store: RootMetaState): string => {
 }
 
 export const getCatalystNodesEndpoint = (store: RootMetaState): string | undefined =>
-  store.meta.config.servers?.catalystsNodesEndpoint
+  store.meta.config.servers?.catalystsNodesEndpoint ?? 'https://play.crossverse.world/config/catalysts.json'
 
 /**
  * Filters out content server hostnames from the allowed list of the MetaState.

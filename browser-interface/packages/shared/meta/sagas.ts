@@ -42,7 +42,7 @@ export function* metaSaga(): any {
 async function fetchFeatureFlagsAndVariants(network: ETHEREUM_NETWORK): Promise<FeatureFlagsResult> {
   const tld = network === ETHEREUM_NETWORK.MAINNET ? 'org' : 'zone'
 
-  const explorerFeatureFlags = 'https://play.crossverse.world'
+  const explorerFeatureFlags = 'https://play.crossverse.world/config/'
 
   const flagsAndVariants = await fetchFlags({ applicationName: 'explorer', featureFlagsUrl: explorerFeatureFlags })
 
